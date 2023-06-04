@@ -16,3 +16,14 @@ pip install -r requirements.txt
 
 ```/model``` 디레토리에 가중치 파일을 넣고 ```inference.py``` 파일의 path를 지정해서 사용하면 된다.
 ## 예시 사진
+1. 이미지 인퍼런스 요청 (초콜릿 이미지)
+
+![초콜릿](/images/chocolate.jpeg)
+
+- 결과
+
+![초콜릿 결과](/images/chocolate_result.png)
+
+2. 학습된 클래스 리스트 요청
+
+![클래스_리스트](/images/class_list.png)
