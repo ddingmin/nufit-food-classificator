@@ -25,13 +25,15 @@ transform = transforms.Compose([
 
 
 def inference(input_image):
-    input_image = Image.open(input_image)
+    input_image = Image.open(input_image).convert('RGB')
     input_data = transform(input_image).unsqueeze(0)
     with torch.no_grad():
         output = model(input_data)
     
-    predicted_classes = torch.softmax(output, 1)
+    predicted_classes = torch.sigmoid(output)
     top_5_values, top_5_indices = torch.topk(predicted_classes, k=5)
+    print(top_5_values)
+    print(top_5_indices)
     result = {"food" : []}
     for i in top_5_indices[0]:
         result["food"].append(labels[i])
@@ -40,3 +42,4 @@ def inference(input_image):
 
 def get_classes():
     return {"class" : labels}
+
