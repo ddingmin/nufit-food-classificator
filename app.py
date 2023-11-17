@@ -1,6 +1,5 @@
 from flask import Flask, request, jsonify
 import model.inference as infer
-import mysql.connector
 
 app = Flask(__name__)
 
@@ -34,23 +33,11 @@ def inference_image():
 def result(foods):
     result = {"food": []}
     for food in foods:
-        id = find_by_name(food)
-        if id is not None:
-            id = id[0]
         result["food"].append({
-            "id": id,
             "name": food
         })
     return result
 
-
-def find_by_name(food_name):
-    cursor = mysql.cursor(buffered=True)
-    print(food_name)
-    cursor.execute("SELECT food.food_id FROM food WHERE food.food_name = %s", (food_name,))
-    data = cursor.fetchone()
-    cursor.close()
-    return data
 
 
 if __name__ == '__main__':
